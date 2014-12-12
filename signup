@@ -7,6 +7,7 @@ import cgitb; cgitb.enable()
 import cgi
 import MySQLdb
 import TeamOhtml
+from TeamOhtml import *
 
 # create a database within the code. it will allow access to the database
 # for the site
@@ -59,10 +60,7 @@ if error_message:
     <td></td><td align=right><input type='submit'/></td></tr>
     </form>
     </table>
-
-    </body>
-    </html>
-    """ % error_message
+    """ % error_message + endHTML()
 else:
     #print test
     cursor.execute('insert User set firstname="%s", lastname="%s", email="%s", password="%s";' % (firstname, lastname, email, password))
