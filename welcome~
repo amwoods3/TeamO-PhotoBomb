@@ -1,0 +1,35 @@
+#!/usr/bin/env python
+# -*- coding: UTF-8 -*-
+# File main
+
+import cgitb; cgitb.enable()
+print """Content-Type: text/html;charset=utf-8
+
+<html>
+<h3 align="Center">
+<font size="7" color="Blue">Photo Look!</font> </h3>
+<style>
+body
+{
+background-image: Pictures("cidade-noite.jpg");
+background-color: Beige;
+}
+</style>
+<body>
+<img src="Pictures/cidade-noite.jpg" alt="" />
+
+<hr>
+<tr>
+<table cellpadding=5 table cellspacing="10" width=35%%>
+
+<table align="center">
+<td><a href=home>Home</a></td>
+<td><a href=signup>Sign Up</a></td>
+<td><a href=login>Log in</a></td>
+</tr>
+</table>
+</br>
+
+</body>
+</html>
+"""
