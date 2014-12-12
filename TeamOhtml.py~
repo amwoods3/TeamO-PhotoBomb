@@ -3,7 +3,6 @@ def beginHTML():
 
     <h3 align="Center"> <font size="7" color="blue">Photo Bomb</font> </h3>
     <html>
-    <body>
     """
 
 def endHTML():

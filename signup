@@ -6,6 +6,7 @@
 import cgitb; cgitb.enable()
 import cgi
 import MySQLdb
+import TeamOhtml
 
 # create a database within the code. it will allow access to the database
 # for the site
@@ -36,11 +37,7 @@ else:
         
 
 if error_message:
-    print r"""Content-Type: text/html;charset=utf-8
-
-    <html>
-    <h3 align="Center"> <font size="7" color="blue">Photo Swap</font> </h3>
-    <body>
+    print beginHTML() + r"""
     <font size="2" color="red">%s</font>
     <table>
     <form method='post' action="signup">
