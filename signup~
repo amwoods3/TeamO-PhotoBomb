@@ -75,7 +75,7 @@ else:
     <h3 align="Center"> <font size="7" color="blue">Photo Swap</font> </h3>
     <body>
     Signup successful! Yeah!!!
-    <a href="signup"> Click here to continue.</a>
+    <a href="login"> Click here to continue.</a>
     </body>
     </html>
     """
