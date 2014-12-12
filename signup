@@ -60,6 +60,8 @@ if error_message:
     <td></td><td align=right><input type='submit'/></td></tr>
     </form>
     </table>
+
+    <a href="login"> Already have an account? Click here to login! </a>
     """ % error_message + endHTML()
 else:
     #print test
