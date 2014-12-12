@@ -17,3 +17,13 @@ def endHTML():
     </html>
     """
 
+def top_links():
+    return """ 
+    <tr>
+    <table cellpadding=5 table cellspacing="10" width=35%%>
+    <table align="left">
+    <td><a href=welcome>Home</a></td>
+    <td><a href=signup>Sign Up</a></td>
+    <td><a href=login>Log in</a></td>
+    </tr>
+    </table> </br> """

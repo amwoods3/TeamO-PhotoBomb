@@ -5,33 +5,22 @@
 import cgitb; cgitb.enable()
 import cgi
 import TeamOhtml
+import page_functions
+import MySQLdb
 from TeamOhtml import *
+from page_functions import *
 
-print beginHTML() + """
-<tr>
-<table cellpadding=5 table cellspacing="10" width=35%%>
-<table align="left">
-<td><a href=welcome>Home</a></td>
-<td><a href=signup>Sign Up</a></td>
-<td><a href=login>Log in</a></td>
-</tr>
-</table> </br> 
-<p>
 
-<table>
-<tr>
-Please enter your log in information:
-<form method='post' action="home">
-<tr>
-<td>Email: </td>
-<td><input type='text' value='' name'email' /> </td></tr>
-<tr>
-<td>Password: </td>
-<td><input type='password' value='' name'password' /> </td></tr>
-<tr>
-<td></td><td align=right><input type='submit'/></td></tr>
-</tr>
-</form>
-</table>
-""" + endHTML()
+db = MySQLdb.connect(host="localhost", port=3306, user="root", passwd="", db="PhotoBomb")
+
+form = cgi.FieldStorage()
+email = form.getfirst('email', "")
+password = form.getfirst('password', "")
+
+cursor = db.cursor()
+passd = ''
+if email:
+    if cursor.execute('SELECT password from User where email="%s";' % email) >= 1:
+        passd = cursor.fetchone()
+print beginHTML() + top_links() + check_login(email, password, passd) + endHTML()
 
