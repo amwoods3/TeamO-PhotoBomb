@@ -1,0 +1,84 @@
+#!/usr/bin/env python
+# -*- coding: UTF-8 -*-
+# File main
+
+
+import cgitb; cgitb.enable()
+import cgi
+import MySQLdb
+
+# create a database within the code. it will allow access to the database
+# for the site
+db = MySQLdb.connect(host="localhost", port=3306, user="root", passwd="", db="PhotoBomb");
+
+#create a cursor for the database, it's necessary
+cursor = db.cursor()
+# get the form, and check if everything is okay
+# if form is empty, use normal signup page.
+form = cgi.FieldStorage()
+firstname = form.getfirst('firstname', "")
+lastname = form.getfirst('lastname', "")
+email = form.getfirst('email', "")
+password = form.getfirst('password', "")
+passcheck = form.getfirst('passcheck', "")
+error_message = ""
+if firstname == lastname and lastname == email and email == password and \
+   password == passcheck and passcheck == "":
+    error_message = " "
+else:
+    if password != passcheck:
+        error_message += "The password does not match password check!</br>"
+    if len(password) < 6:
+        error_message += "Password must be atleast 6 characters in length!</br>"
+    if (cursor.execute('SELECT ID from User where email="%s";' % email) >= 1):
+        test = cursor.fetchone()
+        error_message += " %s " % test
+        error_message += "This email already exists!</br>"
+        
+
+if error_message:
+    print r"""Content-Type: text/html;charset=utf-8
+
+    <html>
+    <h3 align="Center"> <font size="7" color="blue">Photo Swap</font> </h3>
+    <body>
+    <font size="2" color="red">%s</font>
+    <table>
+    <form method='post' action="signup">
+    <tr>
+    <td>First Name</td>
+    <td><input type='text' value='' name='firstname' /> </td></tr>
+    <tr>
+    <td>Last Name</td>
+    <td><input type='text' value='' name='lastname' /> </td></tr>
+    <tr>
+    <td>Email</td>
+    <td><input type='text' value='' name='email' /> </td></tr>
+    <tr><td>Password</td>
+    <td><input type='password' value='' name='password' /> </td></tr>
+    <tr>
+    <td>Confirm Password</td>
+    <td><input type='password' value='' name='passcheck' /> </td></tr>
+    <tr>
+    <td></td><td align=right><input type='submit'/></td></tr>
+    </form>
+    </table>
+
+    </body>
+    </html>
+    """ % error_message
+else:
+    #print test
+    cursor.execute('insert User set firstname="%s", lastname="%s", email="%s", password="%s";' % (firstname, lastname, email, password))
+    print r"""Content-Type: text/html;charset=utf-8
+
+    <html>
+    <h3 align="Center"> <font size="7" color="blue">Photo Swap</font> </h3>
+    <body>
+    Signup successful! Yeah!!!
+    <a href="signup"> Click here to continue.</a>
+    </body>
+    </html>
+    """
+db.commit()
+db.close()
