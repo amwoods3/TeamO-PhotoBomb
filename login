@@ -19,8 +19,11 @@ password = form.getfirst('password', "")
 
 cursor = db.cursor()
 passd = ''
+error = ''
 if email:
     if cursor.execute('SELECT password from User where email="%s";' % email) >= 1:
-        passd = cursor.fetchone()
-print beginHTML() + top_links() + check_login(email, password, passd) + endHTML()
+        passd = cursor.fetchone()[0]
+    else:
+        error = 'Email does not exist!! </br>'
+print beginHTML() + top_links() + check_login(email, password, passd, error) + endHTML()
 
