@@ -15,8 +15,7 @@ print beginHTML() + """
 <td><a href=signup>Sign Up</a></td>
 <td><a href=login>Log in</a></td>
 </tr>
-</table>
-</br>
+</table> </br> </br>
 <p>
 
 <table>
