@@ -7,11 +7,10 @@ print """Content-Type: text/html;charset=utf-8
 
 <html>
 <h3 align="Center">
-<font size="7" color="Blue">Photo Look!</font> </h3>
+<font size="7" color="Blue">Photo Bomb!</font> </h3>
 <style>
 body
 {
-background-image: Pictures("cidade-noite.jpg");
 background-color: Beige;
 }
 </style>
