@@ -3,24 +3,13 @@
 # File main
 
 import cgitb; cgitb.enable()
-print """Content-Type: text/html;charset=utf-8
+import TeamOhtml
+from TeamOhtml import *
 
-<html>
-<h3 align="Center">
-<font size="7" color="Blue">Photo Bomb!</font> </h3>
-<style>
-body
-{
-background-color: Beige;
-}
-</style>
+print beginHTML() + """
 <body>
-<img src="Pictures/cidade-noite.jpg" alt="" />
-
-<hr>
 <tr>
 <table cellpadding=5 table cellspacing="10" width=35%%>
-
 <table align="center">
 <td><a href=welcome>Home</a></td>
 <td><a href=signup>Sign Up</a></td>
@@ -31,4 +20,4 @@ background-color: Beige;
 
 </body>
 </html>
-"""
+""" + endHTML()
