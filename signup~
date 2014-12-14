@@ -64,15 +64,9 @@ if error_message:
 else:
     #print test
     cursor.execute('insert User set firstname="%s", lastname="%s", email="%s", password="%s";' % (firstname, lastname, email, password))
-    print r"""Content-Type: text/html;charset=utf-8
-
-    <html>
-    <h3 align="Center"> <font size="7" color="blue">Photo Swap</font> </h3>
-    <body>
+    print beginHTML() + r"""
     Signup successful! Yeah!!!
     <a href="login"> Click here to continue.</a>
-    </body>
-    </html>
-    """
+    """ + endHTML()
 db.commit()
 db.close()
