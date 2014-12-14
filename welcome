@@ -17,7 +17,8 @@ print beginHTML() + """
 </tr>
 </table>
 </br>
-
+<align="middle">
+<img src="/wedding-photobomb-1.jpg" style="width:500px;height:400px">
 </body>
 </html>
 """ + endHTML()
