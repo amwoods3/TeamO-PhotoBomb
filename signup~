@@ -31,7 +31,8 @@ else:
     if len(password) < 6:
         error_message += "Password must be atleast 6 characters in length!</br>"
     if (cursor.execute('SELECT ID from User where email="%s";' % email) >= 1):
-        error_message += " %s " % cursor.description[0][1]
+        test = cursor.fetchone()
+        error_message += " %s " % test
         error_message += "This email already exists!</br>"
         
 
