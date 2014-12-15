@@ -1,13 +1,14 @@
 def check_login(user, password, passd, error=''):
-    #if user and password and password == passd:
-    #    return """
-    #    %s <a href=home?session=%s>click here</a> to go to the home page!
-    #    """ % (user, user)
-    #if password != passd and not error:
-    #    error += "Incorrect password!!!</br>"
-    location = "login"
     if user and password and password == passd:
-        location = "home"
+        return """
+        %s <a href=home?session=%s>click here</a> to go to the home page!
+        """ % (user, user)
+    if password != passd and not error:
+        error += "Incorrect password!!!</br>"
+    location = "login"
+    #javascript = ""
+    #if user and password and password == passd:
+    #    location = "home"
     return """
     <p>
     <font size="2" color="red">%s</font>

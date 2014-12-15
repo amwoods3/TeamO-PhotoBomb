@@ -1,0 +1,43 @@
+#!/usr/bin/env python
+# -*- coding: UTF-8 -*-
+# File main
+
+import cgitb; cgitb.enable()
+import TeamOhtml
+from TeamOhtml import *
+import cgi
+
+form = cgi.FieldStorage()
+email = form.getfirst('session', '')
+result = ''
+imgur = ''
+import os
+import MySQLdb
+
+db = MySQLdb.connect(host='localhost', port=3306, user='root', passwd='',
+                     db='PhotoBomb')
+cursor = db.cursor()
+
+#get file name:
+fileitem = form['filename']
+if fileitem.filename:
+    fn = os.path.basename(fileitem.filename)
+    file_root = '/var/www/html'
+    file_path = '/images/%s' % (fn)
+    file_savepath = file_root + file_path
+    f = file(file_savepath, 'wb')
+    while 1:
+        chunk = fileitem.file.read(1024)
+        if not chunk:
+            break
+        f.write(chunk)
+    f.close()
+    img += '<img src="' + file_path + '" width=300 height=300/>\n'
+    message = 'The file "' + fn + '" was uploaded successfully'
+else:
+    message = 'No file was uploaded'
+
+print beginHTML() + """
+%s
+You cannot upload something, because I don't feel like it today...
+""" % message + endHTML();

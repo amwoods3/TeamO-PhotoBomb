@@ -1,0 +1,17 @@
+#!/usr/bin/env python
+# -*- coding: UTF-8 -*-
+# File: uploadPhoto
+
+import cgitb; cgitb.enable()
+import page_functions
+import cgi
+import TeamOhtml
+from TeamOhtml import *
+form = cgi.FieldStorage()
+email = form.getfirst('session', '')
+
+print beginHTML() + """
+<form enctype=multipart/form-data action=save_file?session=%s method=post>
+<p>File: <input type=file name='filename' accept='/images/*'/></p>
+<p><input type=submit value=Upload /></p>
+</form> """ % email + endHTML()

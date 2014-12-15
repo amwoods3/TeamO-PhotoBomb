@@ -3,7 +3,7 @@
 # File main
 
 import cgitb; cgitb.enable()
-import cgi
+import cgi, Cookie
 import TeamOhtml
 import page_functions
 import MySQLdb
@@ -25,6 +25,5 @@ if email:
         passd = cursor.fetchone()[0]
     else:
         error = 'Email does not exist!! </br>'
-
 print beginHTML() + top_links() + check_login(email, password, passd, error) + endHTML()
 

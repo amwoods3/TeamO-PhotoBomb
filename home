@@ -3,7 +3,7 @@
 # File main
 
 import cgitb; cgitb.enable()
-import cgi
+import cgi, Cookie, os
 import TeamOhtml
 import page_functions
 from page_functions import *
@@ -13,30 +13,40 @@ import MySQLdb
 db = MySQLdb.connect(host="localhost", port=3306, user="root", passwd="", db="PhotoBomb")
 
 cursor = db.cursor()
-
 form = cgi.FieldStorage()
-email = form.getfirst('email', "")
+email = form.getfirst('session', "")
 user_id = None
-if cursor.execute('SELECT ID FROM User WHERE email="%s";' % email) >= 1:
-    user_id = cursor.fetchone()
-if cursor.execute('SELECT firstname FROM User WHERE email="%s";' % email) >= 1:
-    user_name = cursor.fetchone()[0]
-if user_id:
+
+
+cookie_string = os.environ.get('HTTP_COOKIE')
+
+if not cookie_string and not email:
     print beginHTML() + """
     %s
-    <tr>
-    <table cellpadding=5 table cellspacing="10" width=35%%>
-    <table align="center">
-    <td><a href=home>My Home</a></td>
-    </tr>
-    </table>
-    </br>
-    <align="middle">
-    <img src="/wedding-photobomb-1.jpg" style="width:500px;height:400px">
-    """ % greet_user(user_name) + endHTML()
+    Uh, oh! An error has occurred, <a href=welcome>click here</a> to continue.
+    """ %cookie_string + endHTML()
 else:
-    print beginHTML() + """
-    An error has occurred, <a href=welcome>click here</a> to continue.
-    """ + endHTML()
+    if cursor.execute('SELECT ID FROM User WHERE email="%s";' % email) >= 1:
+        user_id = cursor.fetchone()
+    if cursor.execute('SELECT firstname FROM User WHERE email="%s";' % email) >= 1:
+        user_name = cursor.fetchone()[0]
+    if user_id:
+            print beginHTML() + """
+            %s
+            <tr>
+            <table cellpadding=5 table cellspacing="10" width=35%%>
+            <table align="center">
+            <td><a href=home?session=%s>My Home</a></td>
+            <td><a href=upload?session=%s>Upload Image</a></td>
+            </tr>
+            </table>
+            </br>
+            <align="middle">
+            <img src="/wedding-photobomb-1.jpg" style="width:500px;height:400px">
+            """ % (greet_user(user_name), email, email)+ endHTML()
+    else:
+        print beginHTML() + """
+        An error has occurred, <a href=welcome>click here</a> to continue.
+        """ + endHTML()
 db.commit()
 db.close()
