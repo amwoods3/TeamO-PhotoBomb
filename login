@@ -25,5 +25,6 @@ if email:
         passd = cursor.fetchone()[0]
     else:
         error = 'Email does not exist!! </br>'
+
 print beginHTML() + top_links() + check_login(email, password, passd, error) + endHTML()
 

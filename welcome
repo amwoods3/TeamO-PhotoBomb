@@ -2,23 +2,20 @@
 # -*- coding: UTF-8 -*-
 # File main
 
-import cgitb; cgitb.enable()
+#import cgitb; cgitb.enable()
 import TeamOhtml
 from TeamOhtml import *
 
 print beginHTML() + """
-<body>
 <tr>
 <table cellpadding=5 table cellspacing="10" width=35%%>
 <table align="center">
 <td><a href=welcome>Home</a></td>
-<td><a href=signup>Sign Up</a></td>
+<td><a href=signup>Sign up</a></td>
 <td><a href=login>Log in</a></td>
 </tr>
 </table>
 </br>
 <align="middle">
 <img src="/wedding-photobomb-1.jpg" style="width:500px;height:400px">
-</body>
-</html>
 """ + endHTML()
