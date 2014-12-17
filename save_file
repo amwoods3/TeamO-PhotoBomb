@@ -25,15 +25,18 @@ if fileitem.filename:
     file_root = '/var/www/html'
     file_path = '/images/%s' % (fn)
     file_savepath = file_root + file_path
-    f = file(file_savepath, 'wb')
-    while 1:
-        chunk = fileitem.file.read(1024)
-        if not chunk:
-            break
-        f.write(chunk)
-    f.close()
-    img += '<img src="' + file_path + '" width=300 height=300/>\n'
-    message = 'The file "' + fn + '" was uploaded successfully'
+    message = file_savepath + '\n'
+    message += os.getcwd() + '\n'
+    os.chdir(file_root + '/images/')
+    message += os.getcwd() + '\n'
+    with open(file_savepath, 'wb') as f:
+        while 1:
+            chunk = fileitem.file.read(1024)
+            if not chunk:
+                break
+            f.write(chunk)
+    message += '<img src="' + file_path + '" width=300 height=300/>\n'
+    message += 'The file "' + fn + '" was uploaded successfully'
 else:
     message = 'No file was uploaded'
 
