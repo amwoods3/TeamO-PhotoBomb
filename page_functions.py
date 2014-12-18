@@ -1,7 +1,7 @@
 def check_login(user, password, passd, error=''):
     if user and password and password == passd:
         return """
-        %s <a href=home?session=%s>click here</a> to go to the home page!
+        <p>Hello, %s <a href=home?session=%s>click here</a> to go to the home page!</p>
         """ % (user, user)
     if password != passd and not error:
         error += "Incorrect password!!!</br>"
