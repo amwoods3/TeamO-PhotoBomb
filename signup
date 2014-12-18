@@ -66,6 +66,10 @@ if error_message:
 else:
     #print test
     cursor.execute('insert User set firstname="%s", lastname="%s", email="%s", password="%s";' % (firstname, lastname, email, password))
+    user_id = None
+    if cursor.execute('SELECT ID FROM User WHERE email="%s";' % email) >= 1:
+        user_id = cursor.fetchone()
+    cursor.execute('insert Album set user_ID="%s", name="%s"' % (user_id, 'main'))
     print beginHTML() + r"""
     Signup successful! Yeah!!!
     <a href="login"> Click here to continue.</a>
