@@ -2,7 +2,7 @@
 # -*- coding: UTF-8 -*-
 # File main
 
-import cgitb; cgitb.enable()
+#import cgitb; cgitb.enable()
 import cgi, Cookie
 import TeamOhtml
 import page_functions

@@ -8,7 +8,7 @@ from TeamOhtml import *
 
 print beginHTML() + top_links() + """
 </br>
-=======
+
 <center>
 <h2>Welcome to Photo Bomb!!!</h2>
 </center>
