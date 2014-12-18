@@ -16,6 +16,11 @@ print beginHTML() + """
 </tr>
 </table>
 </br>
+<center>
+<h2>Welcome to Photo Bomb!!!</h2>
+</center>
+<center>
 <align="middle">
 <img src="/wedding-photobomb-1.jpg" style="width:500px;height:400px">
+</center>
 """ + endHTML()
