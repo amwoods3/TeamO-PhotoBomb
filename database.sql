@@ -11,18 +11,11 @@ password varchar(255),
 PRIMARY KEY (ID)
 );
 
-CREATE TABLE Album
-(
-ID int NOT NULL AUTO_INCREMENT, 
-user_ID int,
-name varchar(100),
-PRIMARY KEY (ID)
-);
-
 CREATE TABLE Image
 (
 ID int NOT NULL AUTO_INCREMENT,
-album_ID int,
+user_ID int,
 name varchar(100),
-PRIMARY KEY (ID)
+is_private tinyint default 0,
+PRIMARY KEY (ID) 
 );

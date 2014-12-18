@@ -5,6 +5,7 @@
 
 import cgitb; cgitb.enable()
 import cgi
+import os
 import MySQLdb
 import TeamOhtml
 from TeamOhtml import *
@@ -34,9 +35,7 @@ else:
         error_message += "Password must be atleast 6 characters in length!</br>"
     if (cursor.execute('SELECT ID from User where email="%s";' % email) >= 1):
         test = cursor.fetchone()
-        error_message += "This email already exists!</br>"
-        
-
+        error_message += "This email already exists!</br>" 
 if error_message:
     print beginHTML() + r"""
     <font size="2" color="red">%s</font>
@@ -65,11 +64,10 @@ if error_message:
     """ % error_message + endHTML()
 else:
     #print test
+    if not os.path.exists('/var/www/html/images/%s' % email):
+        os.system('mkdir var/www/html/images/%s' % email)
     cursor.execute('insert User set firstname="%s", lastname="%s", email="%s", password="%s";' % (firstname, lastname, email, password))
     user_id = None
-    if cursor.execute('SELECT ID FROM User WHERE email="%s";' % email) >= 1:
-        user_id = cursor.fetchone()
-    cursor.execute('insert Album set user_ID="%s", name="%s"' % (user_id, 'main'))
     print beginHTML() + r"""
     Signup successful! Yeah!!!
     <a href="login"> Click here to continue.</a>

@@ -25,13 +25,14 @@ fileitem = form['filename']
 if cursor.execute('SELECT firstname FROM User WHERE email="%s";' % email) >= 1:
         user_name = cursor.fetchone()[0]
 if cursor.execute('SELECT ID FROM User WHERE email="%s";' % email) >= 1:
-        user_id = cursor.fetchone()
+        user_id = cursor.fetchone()[0]
     
 
 if fileitem.filename:
     fn = os.path.basename(fileitem.filename)
+    fn = fn[:-4] + email + fn[-4:]
     file_root = '/var/www/html'
-    file_path = '/images/%s' % (fn[:-4] + email + fn[-4:])
+    file_path = '/images/%s' % fn
     file_savepath = file_root + file_path
     message = file_savepath + '\n'
     message += os.getcwd() + '\n'
@@ -45,14 +46,16 @@ if fileitem.filename:
             f.write(chunk)
     message += '<img src="' + file_path + '" width=300 height=300/>\n'
     message += 'The file "' + fn + '" was uploaded successfully'
-    cursor.execute(
+    with open('/var/www/cgi-bin/TeamO-PhotoBomb/insert_image.sql') as f:
+	    cursor.execute(f.read() % (user_id, fn))
 else:
     message = 'No file was uploaded'
 
 print beginHTML() + """
 %s
-You cannot upload something, because I don't feel like it today...
-""" % message + endHTML();
+%s
+%s
+""" % (user_id, top_links(email), message) + endHTML()
 
 db.commit()
 db.close()

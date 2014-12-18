@@ -1,1 +1,1 @@
-insert Image set album_ID="%s", name="%s";
+insert Image set user_ID="%s", name="%s";

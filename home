@@ -33,17 +33,11 @@ else:
     if user_id:
             print beginHTML() + """
             %s
-            <tr>
-            <table cellpadding=5 table cellspacing="10" width=35%%>
-            <table align="center">
-            <td><a href=home?session=%s>My Home</a></td>
-            <td><a href=upload?session=%s>Upload Image</a></td>
-            </tr>
-            </table>
+            %s
             </br>
             <align="middle">
             <img src="/wedding-photobomb-1.jpg" style="width:500px;height:400px">
-            """ % (greet_user(user_name), email, email)+ endHTML()
+            """ % (greet_user(user_name), top_links(email))+ endHTML()
     else:
         print beginHTML() + """
         An error has occurred, <a href=welcome>click here</a> to continue.

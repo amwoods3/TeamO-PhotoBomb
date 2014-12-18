@@ -1,0 +1,59 @@
+#!/usr/bin/env python
+# -*- coding: UTF-8 -*-
+# File: viewPhotos
+
+import cgitb; cgitb.enable()
+import page_functions
+import TeamOhtml
+from TeamOhtml import *
+import cgi
+form = cgi.FieldStorage()
+username = form.getfirst('session', '')
+view = form.getfirst('view', '')
+result = ''
+message = ''
+import MySQLdb
+db = MySQLdb.connect(host='localhost', port=3306,
+                     user='root', passwd='', db='PhotoBomb')
+cursor = db.cursor()
+if view:
+    result = ' ' + view
+elif username:
+    result = ' ' + username
+    
+userID = -1
+if cursor.execute("SELECT ID FROM User WHERE email='%s'" % result.strip()) >= 1:
+    userID = cursor.fetchone()[0]
+    message += "this user's id:" + str(userID)
+photos = [] # (image_name)
+img_list = []
+if cursor.execute("SELECT * FROM Image WHERE user_ID='%s'" %userID) >= 1:
+    img_list = cursor.fetchall()
+for item in img_list:
+    if result.strip() != username:
+        if item[3] == 0:
+            photos.append(item[2])
+    else:
+        photos.append(item[2])
+
+print_table = ''
+i = 1
+if result:
+    print_table += '<table>\n'
+    print_table += '<tr>\n'
+    for item in photos:
+        if i % 5 == 0:
+            print_table +='</tr></tr>\n'
+        print_table += '<td>\n'
+        print_table += "<img src='%s' alt='%s' width=300 height=300 />\n" % ('/images/' + item, item)
+        i = i + 1
+    print_table += '</tr>\n'
+    print_table += '</table>'
+
+print beginHTML() + """
+</br>
+%s
+%s's photos.
+%s
+""" % (top_links(username), result, print_table) + endHTML()
+db.close()

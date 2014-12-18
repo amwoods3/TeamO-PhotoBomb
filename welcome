@@ -6,15 +6,7 @@
 import TeamOhtml
 from TeamOhtml import *
 
-print beginHTML() + """
-<tr>
-<table cellpadding=5 table cellspacing="10" width=35%%>
-<table align="center">
-<td><a href=welcome>Home</a></td>
-<td><a href=signup>Sign up</a></td>
-<td><a href=login>Log in</a></td>
-</tr>
-</table>
+print beginHTML() + top_links() + """
 </br>
 <center>
 <h2>Welcome to Photo Bomb!!!</h2>

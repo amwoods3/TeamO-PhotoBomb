@@ -11,7 +11,8 @@ form = cgi.FieldStorage()
 email = form.getfirst('session', '')
 
 print beginHTML() + """
+%s
 <form enctype=multipart/form-data action=save_file?session=%s method=post>
 <p>File: <input type=file name='filename' accept='/images/*'/></p>
 <p><input type=submit value=Upload /></p>
-</form> """ % email + endHTML()
+</form> """ % (top_links(email), email) + endHTML()
