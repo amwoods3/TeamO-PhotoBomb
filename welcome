@@ -15,12 +15,18 @@ print beginHTML() + """
 <td><a href=login>Log in</a></td>
 </tr>
 </table>
-</br>
 <center>
 <h2>Welcome to Photo Bomb!!!</h2>
 </center>
+<p>
 <center>
 <align="middle">
 <img src="/wedding-photobomb-1.jpg" style="width:500px;height:400px">
 </center>
+<p><p><p><p>
+<center>
+<p> Need a place to store your photos??? </p>
+<p> TRY PHOTO-BOMB TODAY! </p>
+</center>
+</p></p></p></p>
 """ + endHTML()
