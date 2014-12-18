@@ -2,7 +2,7 @@ def beginHTML():
     return """Content-Type: text/html;charset=utf-8
 
     <a href=welcome style="text-decoration:none">
-    <h3 align="Center"> <font size="7" color="blue">Photo Bomb!</font> </h3>
+    <h3 align="Center"> <font size="7" color="black">Photo Bomb!</font> </h3>
     </a>
     <hr>
     <html>
